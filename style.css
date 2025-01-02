@@ -5,13 +5,16 @@ body {
   height: 100vh;
   margin: 0;
 }
+
 .gameBox {
   text-align: center;
 }
+
 .scoreBox {
   margin-bottom: 20px;
   font-size: 20px;
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 100px);
@@ -30,4 +33,4 @@ button {
   color: white;
   border: none;
   border-radius: 5px;
-}
+}/*# sourceMappingURL=style.css.map */
