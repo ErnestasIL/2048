@@ -33,4 +33,11 @@ button {
   color: white;
   border: none;
   border-radius: 5px;
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+  background: orange;
+  border-radius: 5px;
 }/*# sourceMappingURL=style.css.map */
