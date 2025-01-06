@@ -47,6 +47,10 @@ function updateGrid() {
     }
   }
   scoreDisplay.textContent = score;
+
+  if (isGameOver()) {
+    alert("Game Over!");
+  }
 }
 function getColor(value) {
   const colors = {
@@ -151,4 +155,14 @@ document.addEventListener("keydown", (e) => {
     updateGrid();
   }
 });
+function isGameOver() {
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (grid[i][j] === 0) return false;
+      if (i < 3 && grid[i][j] === grid[i + 1][j]) return false;
+      if (j < 3 && grid[i][j] === grid[i][j + 1]) return false;
+    }
+  }
+  return true;
+}
 createGrid();
