@@ -65,4 +65,88 @@ function getColor(value) {
   };
   return colors[value] || "#3c3a32";
 }
+function moveUp() {
+  let moved = false;
+  for (let j = 0; j < 4; j++) {
+    let column = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
+    column = merge(column);
+    for (let i = 0; i < 4; i++) {
+      if (grid[i][j] !== column[i]) moved = true;
+      grid[i][j] = column[i];
+    }
+  }
+  return moved;
+}
+function moveDown() {
+  let moved = false;
+  for (let j = 0; j < 4; j++) {
+    let column = [grid[3][j], grid[2][j], grid[1][j], grid[0][j]];
+    column = merge(column);
+    for (let i = 0; i < 4; i++) {
+      if (grid[i][j] !== column[i]) moved = true;
+      grid[3 - i][j] = column[i];
+    }
+  }
+  return moved;
+}
+function moveLeft() {
+  let moved = false;
+  for (let i = 0; i < 4; i++) {
+    let row = grid[i];
+    row = merge(row);
+    if (JSON.stringify(grid[i]) !== JSON.stringify(row)) moved = true;
+    grid[i] = row;
+  }
+  return moved;
+}
+function moveRight() {
+  let moved = false;
+  for (let i = 0; i < 4; i++) {
+    let row = grid[i].slice().reverse();
+    row = merge(row);
+    row = row.reverse();
+    if (JSON.stringify(grid[i]) !== JSON.stringify(row)) moved = true;
+    grid[i] = row;
+  }
+  return moved;
+}
+
+function merge(line) {
+  let newLine = line.filter((value) => value !== 0);
+  for (let i = 0; i < 4; i++) {
+    if (newLine[i] === newLine[i + 1]) {
+      newLine[i] *= 2;
+      score += newLine[i];
+      newLine[i + 1] = 0;
+    }
+  }
+  newLine = newLine.filter((value) => value !== 0);
+  while (newLine.lenght < 4) {
+    newLine.push(0);
+  }
+  return newLine;
+}
+document.addEventListener("keydown", (e) => {
+  let moved = false;
+  switch (e.key) {
+    case "ArrowUp":
+      moved = moveUp();
+      break;
+    case "ArrowDown":
+      moved = moveDown();
+      break;
+    case "ArrowLeft":
+      moved = moveLeft();
+      break;
+    case "ArrowRight":
+      moved = moveRight();
+      break;
+    default:
+      break;
+  }
+  if (moved) {
+    addTile();
+    updateGrid();
+  }
+});
 createGrid();
