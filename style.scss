@@ -35,6 +35,11 @@ button {
 .tile {
   width: 100px;
   height: 100px;
-  background: rgb(216, 200, 171);
+  background: #cdc1b4;
+  font-size: 24px;
+  color: #776e65;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
 }
