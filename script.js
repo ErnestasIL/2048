@@ -3,7 +3,10 @@ const scoreDisplay = document.querySelector(".score");
 const restartButton = document.querySelector(".restart");
 let score = 0;
 let grid = [];
-
+let highScore = localStorage.getItem("highScore")
+  ? parseInt(localStorage.getItem("highScore"))
+  : 0;
+document.querySelector(".highscore");
 function createGrid() {
   gridContainer.innerHTML = "";
   grid = [];
@@ -165,4 +168,13 @@ function isGameOver() {
   }
   return true;
 }
+
+restartButton.addEventListener("click", () => {
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("highScore", highScore);
+  }
+  document.querySelector(".highscore").textContent = highScore;
+  createGrid();
+});
 createGrid();
