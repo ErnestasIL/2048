@@ -65,6 +65,7 @@ function getColor(value) {
   };
   return colors[value] || "#3c3a32";
 }
+
 function moveUp() {
   let moved = false;
   for (let j = 0; j < 4; j++) {
@@ -113,7 +114,7 @@ function moveRight() {
 
 function merge(line) {
   let newLine = line.filter((value) => value !== 0);
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < newLine.length - 1; i++) {
     if (newLine[i] === newLine[i + 1]) {
       newLine[i] *= 2;
       score += newLine[i];
@@ -121,11 +122,12 @@ function merge(line) {
     }
   }
   newLine = newLine.filter((value) => value !== 0);
-  while (newLine.lenght < 4) {
+  while (newLine.length < 4) {
     newLine.push(0);
   }
   return newLine;
 }
+
 document.addEventListener("keydown", (e) => {
   let moved = false;
   switch (e.key) {
